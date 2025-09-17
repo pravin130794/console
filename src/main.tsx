@@ -4,13 +4,22 @@ import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <ColorModeScript initialColorMode="light" />
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ChakraProvider>
-  </React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById("root")!);
+
+root.render(
+  React.createElement(
+    React.StrictMode,
+    null,
+    React.createElement(ChakraProvider, null, [
+      React.createElement(ColorModeScript, {
+        initialColorMode: "light",
+        key: "color-mode",
+      }),
+      React.createElement(
+        BrowserRouter,
+        { key: "router" },
+        React.createElement(App, null)
+      ),
+    ])
+  )
 );
